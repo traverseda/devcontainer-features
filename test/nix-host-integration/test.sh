@@ -9,7 +9,8 @@ source dev-container-features-test-lib
 check "nix-store-mounted" test -d /nix/store
 
 # Check if NIX_REMOTE is set to daemon (when daemon is enabled)
-if [ "${ENABLE_DAEMON:-true}" = "true" ]; then
+# The feature option 'enableDaemon' is passed as an environment variable
+if [ "${enableDaemon:-true}" = "true" ]; then
     check "nix-remote-set" bash -c 'echo $NIX_REMOTE' | grep daemon
     # Check if daemon socket is accessible
     # Note: On some systems, the socket might be in a different location or not present in the container
