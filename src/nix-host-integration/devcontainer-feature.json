@@ -1,0 +1,32 @@
+{
+    "id": "nix-host-integration",
+    "version": "1.0.0",
+    "name": "Nix Host Integration",
+    "description": "Mounts host Nix store and daemon for seamless Nix usage",
+    "options": {
+        "enableDaemon": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable host Nix daemon access"
+        }
+    },
+    "mounts": [
+        {
+            "source": "/nix",
+            "target": "/nix",
+            "type": "bind",
+            "readonly": true
+        },
+        {
+            "source": "/nix/var/nix/daemon-socket",
+            "target": "/nix/var/nix/daemon-socket",
+            "type": "bind"
+        }
+    ],
+    "containerEnv": {
+        "NIX_REMOTE": "daemon"
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

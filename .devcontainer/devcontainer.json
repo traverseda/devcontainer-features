@@ -23,3 +23,13 @@
     "remoteUser": "node",
     "updateContentCommand": "npm install -g @devcontainers/cli"
 }
+{
+    "name": "Dev Container with Host Nix",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "nix-host-integration": {
+            "enableDaemon": true
+        }
+    },
+    "postCreateCommand": "source /etc/profile.d/nix.sh && nix --version"
+}

@@ -1,0 +1,16 @@
+{
+    "test_defaults": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "nix-host-integration": {}
+        }
+    },
+    "test_daemon_disabled": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
+        "features": {
+            "nix-host-integration": {
+                "enableDaemon": false
+            }
+        }
+    }
+}
