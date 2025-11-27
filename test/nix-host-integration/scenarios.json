@@ -1,16 +1,40 @@
 {
-    "test_defaults": {
+    "test_defaults_ubuntu": {
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
         "features": {
             "nix-host-integration": {}
         }
     },
-    "test_daemon_disabled": {
+    "test_daemon_disabled_ubuntu": {
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
         "features": {
             "nix-host-integration": {
                 "enableDaemon": false
             }
+        }
+    },
+    "test_defaults_debian": {
+        "image": "debian:latest",
+        "features": {
+            "nix-host-integration": {}
+        }
+    },
+    "test_defaults_alpine": {
+        "image": "alpine:latest",
+        "features": {
+            "nix-host-integration": {}
+        }
+    },
+    "test_defaults_fedora": {
+        "image": "fedora:latest",
+        "features": {
+            "nix-host-integration": {}
+        }
+    },
+    "test_defaults_nixos": {
+        "image": "nixos/nix:latest",
+        "features": {
+            "nix-host-integration": {}
         }
     }
 }

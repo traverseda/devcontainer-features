@@ -1,12 +1,14 @@
 {
-    "color_and_hello": {
+    "nix_integration_with_common_utils": {
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
         "features": {
-            "color": {
-                "favorite": "purple"
+            "ghcr.io/devcontainers/features/common-utils:2": {
+                "installZsh": true,
+                "installOhMyZsh": true,
+                "upgradePackages": true
             },
-            "hello": {
-                "greeting": "Greetings"
+            "nix-host-integration": {
+                "enableDaemon": true
             }
         }
     }

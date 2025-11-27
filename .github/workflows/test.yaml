@@ -13,11 +13,13 @@ jobs:
     strategy:
       matrix:
         features:
-          - color
-          - hello
+          - nix-host-integration
         baseImage:
           - debian:latest
           - ubuntu:latest
+          - alpine:latest
+          - fedora:latest
+          - nixos/nix:latest
           - mcr.microsoft.com/devcontainers/base:ubuntu
     steps:
       - uses: actions/checkout@v4
@@ -34,8 +36,7 @@ jobs:
     strategy:
       matrix:
         features:
-          - color
-          - hello
+          - nix-host-integration
     steps:
       - uses: actions/checkout@v4
 
