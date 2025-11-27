@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 VERSION=${VERSION:-"latest"}
@@ -21,9 +21,22 @@ else
 fi
 
 # Add UV to PATH for all users
-echo 'export PATH="${HOME}/.cargo/bin:${PATH}"' | tee -a /etc/bash.bashrc >> /etc/profile
-if [ -d /etc/zsh/zshrc ]; then
-    echo 'export PATH="${HOME}/.cargo/bin:${PATH}"' >> /etc/zsh/zshrc
-fi
+# The UV installer typically installs to ~/.cargo/bin
+# Make sure it's available for all users
+for user_home in /root /home/*; do
+    if [ -d "${user_home}" ]; then
+        user_dir="${user_home}/.cargo/bin"
+        if [ -d "${user_dir}" ]; then
+            echo "export PATH=\"${user_dir}:\${PATH}\"" >> "${user_home}/.bashrc"
+            if [ -f "${user_home}/.zshrc" ]; then
+                echo "export PATH=\"${user_dir}:\${PATH}\"" >> "${user_home}/.zshrc"
+            fi
+        fi
+    fi
+done
+
+# Also add to global profile
+echo 'export PATH="${HOME}/.cargo/bin:${PATH}"' >> /etc/profile.d/uv.sh
+chmod +x /etc/profile.d/uv.sh
 
 echo "Done!"
