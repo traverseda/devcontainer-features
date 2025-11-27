@@ -7,9 +7,7 @@ Installs the UV package manager
 
 ```json
 "features": {
-    "ghcr.io/traverseda/devcontainer-features/uv:1": {
-        "version": "latest"
-    }
+    "ghcr.io/traverseda/devcontainer-features/uv:1": {}
 }
 ```
 
