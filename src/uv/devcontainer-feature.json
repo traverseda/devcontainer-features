@@ -1,19 +1,18 @@
 {
-    "name": "Hello, World!",
-    "id": "hello",
-    "version": "1.0.2",
-    "description": "A hello world feature",
+    "name": "UV",
+    "id": "uv",
+    "version": "1.0.0",
+    "description": "Installs the UV package manager",
     "options": {
-        "greeting": {
+        "version": {
             "type": "string",
             "proposals": [
-                "hey",
-                "hello",
-                "hi",
-                "howdy"
+                "latest",
+                "0.1.0",
+                "0.2.0"
             ],
-            "default": "hey",
-            "description": "Select a pre-made greeting, or enter your own"
+            "default": "latest",
+            "description": "The version of UV to install"
         }
     },
     "installsAfter": [
