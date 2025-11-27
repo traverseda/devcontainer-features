@@ -20,23 +20,15 @@ else
     curl -LsSf https://astral.sh/uv/install.sh | sh -s -- -v "${VERSION}"
 fi
 
-# Add UV to PATH for all users
-# The UV installer typically installs to ~/.cargo/bin
-# Make sure it's available for all users
-for user_home in /root /home/*; do
-    if [ -d "${user_home}" ]; then
-        user_dir="${user_home}/.cargo/bin"
-        if [ -d "${user_dir}" ]; then
-            echo "export PATH=\"${user_dir}:\${PATH}\"" >> "${user_home}/.bashrc"
-            if [ -f "${user_home}/.zshrc" ]; then
-                echo "export PATH=\"${user_dir}:\${PATH}\"" >> "${user_home}/.zshrc"
-            fi
-        fi
-    fi
-done
-
-# Also add to global profile
-echo 'export PATH="${HOME}/.cargo/bin:${PATH}"' >> /etc/profile.d/uv.sh
-chmod +x /etc/profile.d/uv.sh
+# The UV installer installs to /root/.cargo/bin by default when running as root
+# Let's make it available system-wide
+UV_INSTALL_DIR="/root/.cargo/bin"
+if [ -d "${UV_INSTALL_DIR}" ]; then
+    # Create a symlink in /usr/local/bin which is typically in the PATH
+    ln -sf ${UV_INSTALL_DIR}/uv /usr/local/bin/uv
+    # Ensure the directory is in PATH for all users
+    echo "export PATH=\"${UV_INSTALL_DIR}:\$PATH\"" >> /etc/profile.d/uv.sh
+    chmod +x /etc/profile.d/uv.sh
+fi
 
 echo "Done!"
